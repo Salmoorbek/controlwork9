@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Builder
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class TaskDto {
     private Long id;
+    @Size(min = 8, max = 25)
     private String title;
     private LocalDate creationDate;
     private Long developerId;
