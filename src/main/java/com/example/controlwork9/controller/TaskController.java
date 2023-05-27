@@ -50,24 +50,25 @@ public class TaskController {
         return "tasks";
     }
 
-    @GetMapping("/create")
+    @GetMapping("/tasks/create")
     public String showCreateTaskForm(Model model) {
         List<User> developers = userService.getDevelopers();
         model.addAttribute("developers", developers);
-        model.addAttribute("task", new Task());
+        model.addAttribute("task", new TaskDto());
         return "create-task";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/tasks/create")
     public String createTask(@ModelAttribute("task") @Valid TaskDto taskDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "create-task";
         }
+        System.out.println(taskDto);
         taskService.createTask(taskDto);
         return "redirect:/tasks";
     }
 
-    @GetMapping("/{taskId}")
+    @GetMapping("/tasks/{taskId}")
     public String getTaskDetails(@PathVariable("taskId") Long taskId, Model model) {
         Task task = taskService.getTaskById(taskId);
         List<WorkLog> worklogs = worklogService.getWorklogsByTask(taskId);
@@ -78,13 +79,13 @@ public class TaskController {
         return "task-details";
     }
 
-    @PostMapping("/{taskId}/status")
+    @PostMapping("/tasks/{taskId}/status")
     public ResponseEntity<String> changeTaskStatus(@PathVariable("taskId") Long taskId, @RequestParam("status") String status) {
         taskService.changeTaskStatus(taskId, status);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/{taskId}/worklogs")
+    @PostMapping("/tasks/{taskId}/worklogs")
     public ResponseEntity<String> addWorklog(@PathVariable("taskId") Long taskId, @RequestParam("time") String time,
                                              @RequestParam("description") String description) {
         worklogService.addWorklog(taskId, time, description);

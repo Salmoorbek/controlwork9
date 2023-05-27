@@ -24,7 +24,7 @@
             <td>${task.title}</td>
             <td>${task.status}</td>
             <td>
-                <a href="/task/${task.id}">Просмотреть</a>
+                <a href="/tasks/${task.id}">Просмотреть</a>
             </td>
         </tr>
     </#list>

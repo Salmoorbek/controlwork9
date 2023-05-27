@@ -46,7 +46,7 @@ public class TaskService {
         User developer = userRepository.findById(taskDto.getDeveloperId())
                 .orElseThrow(() -> new NotFoundException("Developer not found"));
         task.setDeveloper(developer);
-        task.setStatus(Status.CREATED);
+        task.setStatus(taskDto.getStatus());
         taskRepository.save(task);
     }
 

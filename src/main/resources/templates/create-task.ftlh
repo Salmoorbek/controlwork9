@@ -17,7 +17,7 @@
     <div>
         <label for="status">Статус:</label>
         <select id="status" name="status" required>
-            <option value="TODO">TODO</option>
+            <option value="CREATED">CREATED</option>
             <option value="IN_PROGRESS">IN_PROGRESS</option>
             <option value="COMPLETED">COMPLETED</option>
         </select>
@@ -26,9 +26,11 @@
     <div>
         <label for="developer">Разработчик:</label>
         <select id="developer" name="developer" required>
-            <#list developers as developer>
-                <option value="${developer.id}">${developer.name}</option>
-            </#list>
+            <#if developers??>
+                <#list developers as developer>
+                    <option value="${developer.id}">${developer.name}</option>
+                </#list>
+            </#if>
         </select>
     </div>
 

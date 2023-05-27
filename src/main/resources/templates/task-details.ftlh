@@ -7,20 +7,20 @@
 <h1>Подробности задачи</h1>
 
 <h2>Задача:</h2>
-<p>Название: ${task.name}</p>
+<p>Название: ${task.title}</p>
 <p>Статус: ${task.status}</p>
 
 <h2>Список вложений:</h2>
 <ul>
     <#list attachments as attachment>
-        <li>${attachment.name}</li>
+        <li>${attachment.filename}</li>
     </#list>
 </ul>
 
 <h2>Список отчетов о работе:</h2>
 <ul>
     <#list worklogs as worklog>
-        <li>${worklog.time} - ${worklog.description}</li>
+        <li>${worklog.timeSpent} - ${worklog.description}</li>
     </#list>
 </ul>
 

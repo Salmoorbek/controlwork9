@@ -30,10 +30,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/users/**").hasRole("MANAGER")
-                .antMatchers("/tasks/**").hasAnyRole("MANAGER", "DEVELOPER")
-                .antMatchers("/attachments/**").hasAnyRole("MANAGER", "DEVELOPER")
-                .antMatchers("/worklogs/**").hasAnyRole("MANAGER", "DEVELOPER")
-                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -42,6 +38,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout");
+
+        http.authorizeRequests()
+                .anyRequest()
+                .permitAll();
+
         http.csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }
