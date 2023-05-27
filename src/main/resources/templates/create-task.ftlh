@@ -10,8 +10,8 @@
     <input type="hidden" name="_csrf" value="${_csrf.token}">
 
     <div>
-        <label for="name">Название:</label>
-        <input type="text" id="name" name="name" required>
+        <label for="title">Название:</label>
+        <input type="text" id="title" name="title" required>
     </div>
 
     <div>
@@ -24,8 +24,8 @@
     </div>
 
     <div>
-        <label for="developer">Разработчик:</label>
-        <select id="developer" name="developer" required>
+        <label for="developerId">Разработчик:</label>
+        <select id="developerId" name="developerId" required>
             <#if developers??>
                 <#list developers as developer>
                     <option value="${developer.id}">${developer.name}</option>
