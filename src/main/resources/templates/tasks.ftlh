@@ -16,6 +16,7 @@
         <th>Название</th>
         <th>Статус</th>
         <th>Действия</th>
+        <th>Дата</th>
     </tr>
     </thead>
     <tbody>
@@ -26,12 +27,13 @@
             <td>
                 <a href="/tasks/${task.id}">Просмотреть</a>
             </td>
+            <td>${task.creationDate}</td>
         </tr>
     </#list>
     </tbody>
 </table>
 
-<h2>Другие детали:</h2>
+<h2><a href="/tasks/create">Добавить задачу</a></h2>
 
 <p>Выйти из аккаунта: <a href="/logout">Выйти</a></p>
 </body>
