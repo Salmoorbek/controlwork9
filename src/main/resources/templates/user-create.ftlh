@@ -21,7 +21,7 @@
 
     <div>
         <label for="password">Пароль:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" required autocomplete="current-password">
     </div>
 
     <button type="submit">Создать</button>

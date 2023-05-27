@@ -40,7 +40,6 @@ public class UserController {
     @GetMapping("/users/create")
     public String createUserForm(Model model) {
         model.addAttribute("user", new UserRegisterDto());
-        System.out.println("==============");
         return "user-create";
     }
 
@@ -49,7 +48,6 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "user-create";
         }
-        System.out.println(userDto);
         userService.createUser(userDto);
         return "redirect:/users";
     }

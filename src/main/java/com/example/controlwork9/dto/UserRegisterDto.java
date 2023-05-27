@@ -16,17 +16,10 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRegisterDto {
-    private Long id;
-
-    @NotBlank
-    @Size(min = 8, max = 25)
+    @Size(max = 25)
     private String name;
-    @NotBlank
-    @Email
-    @Size(min = 8, max = 25)
+    @Size(max = 25)
     private String email;
-    @NotBlank
-    @Size(min = 8, max = 16)
+    @Size(max = 16)
     private String password;
-    private Role role;
 }

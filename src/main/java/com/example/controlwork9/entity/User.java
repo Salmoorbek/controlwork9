@@ -24,15 +24,12 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(name = "name")
-    @Size(max = 25)
     private String name;
 
     @Column(name = "email", unique = true)
-    @Size(max = 25)
     private String email;
 
     @Column(name = "password")
-    @Size(max = 16)
     private String password;
 
     @Column(name = "role")
