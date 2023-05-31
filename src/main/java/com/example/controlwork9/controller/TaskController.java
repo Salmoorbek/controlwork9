@@ -1,15 +1,15 @@
 package com.example.controlwork9.controller;
 
 import com.example.controlwork9.dto.TaskDto;
-import com.example.controlwork9.entity.Attachment;
-import com.example.controlwork9.entity.Task;
-import com.example.controlwork9.entity.User;
-import com.example.controlwork9.entity.WorkLog;
+import com.example.controlwork9.entity.*;
 import com.example.controlwork9.service.AttachmentService;
 import com.example.controlwork9.service.TaskService;
 import com.example.controlwork9.service.UserService;
 import com.example.controlwork9.service.WorkLogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,15 +38,33 @@ public class TaskController {
     }
 
     @GetMapping("/tasks")
-    public String getAllTasks(Model model) {
+    public String getAllTasks(@RequestParam(defaultValue = "0") int page,
+                              @RequestParam(defaultValue = "3") int size,
+                              Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication.isAuthenticated()) {
             String userEmail = authentication.getName();
             model.addAttribute("userEmail", userEmail);
         }
-
-        List<Task> tasks = taskService.getAllTasks();
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Task> tasks = taskService.getTasksByPage(pageable);
         model.addAttribute("tasks", tasks);
+        return "tasks";
+    }
+    @GetMapping("/tasks/filter")
+    public String filterTasksByStatus(@RequestParam(defaultValue = "0") int page,
+                                      @RequestParam(defaultValue = "3") int size,
+                                      @RequestParam Status status,
+                                      Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.isAuthenticated()) {
+            String userEmail = authentication.getName();
+            model.addAttribute("userEmail", userEmail);
+        }
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Task> tasks = taskService.getTasksByStatus(status, pageable);
+        model.addAttribute("tasks", tasks);
+        model.addAttribute("status", status);
         return "tasks";
     }
 

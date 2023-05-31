@@ -1,9 +1,9 @@
 package com.example.controlwork9.entity;
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ public class Task {
     private String title;
 
     @Column(name = "creation_date")
+    @PastOrPresent
     private LocalDate creationDate;
 
     @ManyToOne

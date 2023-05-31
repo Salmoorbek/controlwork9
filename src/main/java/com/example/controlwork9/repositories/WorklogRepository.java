@@ -9,7 +9,5 @@ import java.util.List;
 
 @Repository
 public interface WorklogRepository extends JpaRepository<WorkLog, Long> {
-    List<WorkLog> findByTask(Task task);
-
     List<WorkLog> findByTaskId(Long taskId);
 }

@@ -8,6 +8,8 @@ import com.example.controlwork9.exceptions.InvalidStatusChangeException;
 import com.example.controlwork9.repositories.TaskRepository;
 import com.example.controlwork9.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -33,10 +35,6 @@ public class TaskService {
     public Task getTaskById(Long taskId) {
         return taskRepository.findById(taskId)
                 .orElseThrow(() -> new NotFoundException("Task not found"));
-    }
-
-    public List<Task> getTasksByStatus(String status) {
-        return taskRepository.findByStatus(status);
     }
 
     public void createTask(TaskDto taskDto) {
@@ -65,5 +63,16 @@ public class TaskService {
         taskRepository.save(task);
     }
 
+    public Page<Task> getTasksByPageAndStatus(Pageable pageable, Status status) {
+        return taskRepository.findAllByStatus(status, pageable);
+    }
+
+    public Page<Task> getTasksByPage(Pageable pageable) {
+        return taskRepository.findAll(pageable);
+    }
+
+    public Page<Task> getTasksByStatus(Status status, Pageable pageable) {
+        return taskRepository.findAllByStatus(status, pageable);
+    }
 }
 

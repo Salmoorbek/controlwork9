@@ -18,15 +18,6 @@ public class WorkLogService {
         this.worklogRepository = worklogRepository;
         this.taskRepository = taskRepository;
     }
-
-
-    public WorkLog saveWorklog(WorkLog worklog) {
-        return worklogRepository.save(worklog);
-    }
-
-    public List<WorkLog> getWorklogsByTaskId(Long taskId) {
-        return worklogRepository.findByTaskId(taskId);
-    }
     public List<WorkLog> getWorklogsByTask(Long taskId) {
         return worklogRepository.findByTaskId(taskId);
     }

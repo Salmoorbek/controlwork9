@@ -1,6 +1,11 @@
 package com.example.controlwork9.controller;
 
+import com.example.controlwork9.entity.Status;
+import com.example.controlwork9.entity.Task;
 import com.example.controlwork9.service.TaskService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -33,5 +38,26 @@ public class MainController {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
         }
         return "redirect:/login";
+    }
+
+    @GetMapping("/")
+    public String getMainPage(@RequestParam(defaultValue = "0") int page,
+                              @RequestParam(defaultValue = "3") int size,
+                              Model model) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Task> tasks = taskService.getTasksByPage(pageable);
+        model.addAttribute("tasks", tasks);
+        return "index";
+    }
+    @GetMapping("/filter")
+    public String filterTasksByStatus(@RequestParam(defaultValue = "0") int page,
+                                      @RequestParam(defaultValue = "3") int size,
+                                      @RequestParam Status status,
+                                      Model model) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Task> tasks = taskService.getTasksByStatus(status, pageable);
+        model.addAttribute("tasks", tasks);
+        model.addAttribute("status", status);
+        return "index";
     }
 }

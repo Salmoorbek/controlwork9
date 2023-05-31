@@ -4,9 +4,6 @@ import com.example.controlwork9.entity.Role;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-
 @Builder
 @Data
 public class UserDto {

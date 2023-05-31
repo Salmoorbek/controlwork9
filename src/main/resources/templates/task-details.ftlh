@@ -33,9 +33,10 @@
     <div>
         <label for="status">Изменить статус:</label>
         <select id="status" name="status" required>
-            <option value="TODO">TODO</option>
+            <option value="CREATED">CREATED</option>
             <option value="IN_PROGRESS">IN_PROGRESS</option>
             <option value="COMPLETED">COMPLETED</option>
+            <option value="FAILED">FAILED</option>
         </select>
     </div>
     <button type="submit">Изменить статус</button>
